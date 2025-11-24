@@ -1,0 +1,18 @@
+while True:
+    # get inputs
+    principal = float(input("Enter principal amount: "))
+    rate = float(input("Enter annual interest rate (in %): "))
+    time = int(input("Enter time (in years): "))
+
+    # calculate compound amount and interest (annual compounding)
+    amount = principal * (1 + rate / 100) ** time
+    interest = amount - principal
+
+    # show results
+    print(f"\nCompound amount after {time} years: {amount:.2f}")
+    print(f"Compound interest earned: {interest:.2f}\n")
+
+    # ask if user wants to run again
+    again = input("Do you want to calculate again? (Y/N): ").upper()
+    if again != "Y":
+        break
