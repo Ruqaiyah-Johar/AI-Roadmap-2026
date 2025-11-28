@@ -1,0 +1,42 @@
+# Rock Paper Scissors Game
+# Human vs Computer
+
+import random
+
+player_name = input("enter player name: ")
+
+print(f"lets play rock/paper/scissors with {player_name}")
+
+options = ("rock", "paper", "scissors")
+
+playing = True
+
+while playing:
+
+    human = None
+    computer = random.choice(options)
+    while human not in options:
+        human = input("enter a choice(rock/paper/scissor): ")
+    print(f"{player_name}-{human}")
+    print(f"computer-{computer}")
+
+    if human == computer:
+        print("its a tie!")
+    elif human == "rock" and computer == "scissors":
+        print("you win!")
+    elif human == "rock" and computer == "paper":
+        print("you loose")
+    elif human == "scissors" and computer == "rock":
+        print("you loose")
+    elif human == "scissors" and computer == "paper":
+        print("you win!")
+    elif human == "paper" and computer == "rock":
+        print("you win!")
+    elif human == "paper" and computer == "scissors":
+        print("you loose")
+    else:
+        print("you loose")
+    if not input("play again(y/n)? : ").lower() == "y":
+        break
+
+print(f"thanks for playing! {player_name}")

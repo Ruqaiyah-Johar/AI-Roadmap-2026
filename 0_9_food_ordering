@@ -1,0 +1,74 @@
+# Food Ordering
+
+print("Welcome to Our Food joint!")
+name = input("Whats your name?: ")
+print(f"Hello {name} !")
+contact_info = input("Enter your contact number: ")
+
+fries = {
+    "small fries": 90,
+    "medium fries": 130,
+    "large fries": 200,
+    "peri-peri fries": 210
+}
+burgers = {
+    "veg burger": 80,
+    "spicy veg burger": 90,
+    "jain burger": 70,
+    "extra tikki burger": 120
+}
+drinks = {
+    "cola": 70,
+    "sprite": 70,
+    "fanta": 70,
+    "thumbs up": 70,
+    "7-up": 70,
+    "mountain dew": 70
+}
+
+cart = []
+total = 0
+
+print("------FRIES----------")
+for key, value in fries.items():
+    print(f"{key:20}: {value:.2f}")
+
+print("------BURGERS----------")
+for key, value in burgers.items():
+    print(f"{key:20}: {value:.2f}")
+
+print("------DRINKS----------")
+for key, value in drinks.items():
+    print(f"{key:20}: {value:.2f}")
+
+# taking orders
+while True:
+    food = input("What would you like to have? (q to quit): ").lower()
+    if food == "q":
+        break
+    elif food in fries:
+        cart.append(food)
+        total += fries[food]
+    elif food in burgers:
+        cart.append(food)
+        total += burgers[food]
+    elif food in drinks:
+        cart.append(food)
+        total += drinks[food]
+    else:
+        print("Item not found, please type exactly as shown.")
+
+# bill
+print("-----YOUR ORDER--------")
+for food in cart:
+    # find the price from the correct dict
+    if food in fries:
+        price = fries[food]
+    elif food in burgers:
+        price = burgers[food]
+    else:
+        price = drinks[food]
+    print(f"{food} - ₹{price}")
+
+print(f"\nYour total is ₹{total}")
+print("please, vist us again!")

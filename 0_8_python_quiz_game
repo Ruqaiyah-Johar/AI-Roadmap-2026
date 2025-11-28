@@ -1,0 +1,64 @@
+# Python Quiz Game
+
+print("Welcome to science quiz for kids!")
+print("The rules are simple, each correct answer has +1 mark!")
+print("Each wrong answer has no negative marking")
+print("Isn't that wonderful?")
+
+questions = (
+    "Name the process by which plants prepare food?: ",
+    "Which planet is called RED PLANET?: ",
+    "Which organ pumps blood?: ",
+    "What is the main source of natural light during the day?: ",
+    "What is the solid form of water?: "
+)
+
+options = (
+    ("A.Photosynthesis", "B.Cooking", "C.Food", "D.Chlorophyll"),
+    ("A.Jupiter", "B.Venus", "C.Mars", "D.Earth"),
+    ("A.Stomach", "B.Brain", "C.Heart", "D.Lungs"),
+    ("A.Sun", "B.Moon", "C.Stars", "D.Tubelight"),
+    ("A.Vapour", "B.Ice", "C.River", "D.Ocean")
+)
+
+answers = ("A", "C", "C", "A", "B")
+guesses = []
+score = 0
+question_num = 0
+
+for question in questions:
+    print("\n" + question)
+
+    # show options for this question
+    for option in options[question_num]:
+        print(option)
+
+    # take ONE guess per question
+    guess = input("Enter (A, B, C, D): ").upper()
+    guesses.append(guess)
+
+    if guess == answers[question_num]:
+        score += 1          # increment score
+        print("Bravo! Right answer!")
+    else:
+        print("Oops! Wrong answer.")
+        print(f"{answers[question_num]} is the correct answer.")
+
+    question_num += 1
+
+print("-----------------")
+print("RESULT")
+print("-----------------")
+
+print("Answers: ", end="")
+for answer in answers:
+    print(answer, end=" ")
+print()
+
+print("Guesses: ", end="")
+for guess in guesses:
+    print(guess, end=" ")
+print()
+
+score = int(score / len(questions) * 100)
+print(f"\nYOUR SCORE IS {score}%")
