@@ -1,0 +1,29 @@
+import os
+from dotenv import load_dotenv
+from openai import OpenAI  # NEW: Import the client class
+
+# Load .env file
+load_dotenv()
+
+# Create OpenAI client (modern way)
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+print("Ruqaiyah's AI Friend is online! Type 'bye' to stop\n")
+
+while True:
+    question = input("You: ")
+    if question.lower() == "bye":
+        print("AI: See you soon! Keep coding")
+        break
+
+    # NEW: Use client.chat.completions.create()
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are a friendly AI mentor."},
+            {"role": "user", "content": question}
+        ]
+    )
+
+    answer = response.choices[0].message.content
+    print("AI:", answer, "\n")
