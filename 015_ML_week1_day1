@@ -1,0 +1,9 @@
+# 15_week1_day1_notes
+# Supervised Machine Learning – Andrew Ng
+# Date: Dec 1, 2025
+# Goal: Understand linear regression with one variable
+
+# Example: Predict house price from size
+size = 2000          # sq ft
+price = 150 + 0.2 * size   # simple model
+print(f"Predicted price for {size} sq ft = ${price}k")
