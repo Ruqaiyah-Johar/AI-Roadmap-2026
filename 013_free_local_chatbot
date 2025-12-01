@@ -1,0 +1,35 @@
+# 13_free_local_chatbot.py
+
+from transformers import pipeline
+
+print("Ruqaiyah's FREE Local AI Chatbot  Type 'bye' to stop\n")
+
+# Use a dialog model from Hugging Face Hub (downloads automatically)
+chatbot = pipeline(
+    "text-generation",
+    model="microsoft/DialoGPT-medium",
+    max_new_tokens=60,
+    pad_token_id=50256,   # avoids some warnings for GPT-style models
+)
+
+chat_history = ""
+
+while True:
+    user_msg = input("You: ")
+    if user_msg.lower() == "bye":
+        print("AI: Bye! Keep building amazing things 🚀")
+        break
+
+    # Add user message to history
+    chat_history += f"User: {user_msg}\nAI:"
+
+    # Get AI reply
+    outputs = chatbot(chat_history)[0]["generated_text"]
+
+    # Extract only the new part of the answer after the last "AI:"
+    ai_reply = outputs.split("AI:")[-1].strip()
+
+    print("AI:", ai_reply, "\n")
+
+    # Add AI reply back into history
+    chat_history += f" {ai_reply}\n"
