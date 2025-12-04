@@ -1,0 +1,36 @@
+# 16_cost_function_mastered.py
+# Date: Dec 4, 2025
+# Supervised Machine Learning – Andrew Ng Week 1
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Fake data: house size vs price
+X = np.array([1, 2, 3, 4, 5])          # size in 1000 sq ft
+y = np.array([1.5, 2.0, 2.5, 3.2, 3.8])  # price in $100k
+
+# Try different slopes (θ1) and see the cost
+
+
+def cost_function(theta1):
+    predictions = theta1 * X
+    errors = predictions - y
+    squared_errors = errors**2
+    return squared_errors.sum() / (2 * len(X))
+
+
+thetas = np.linspace(0.5, 1.0, 100)
+costs = [cost_function(t) for t in thetas]
+
+plt.plot(thetas, costs)
+plt.title("Cost Function J(θ) — I get it now!")
+plt.xlabel("Slope θ1")
+plt.ylabel("Cost J(θ)")
+plt.scatter(0.8, cost_function(0.8), color='red',
+            s=100, label="Lowest cost ≈ here")
+plt.legend()
+plt.savefig("cost_function_curve.png")
+plt.show()
+
+print("Lowest cost found around θ1 = 0.8 → My brain finally clicked today")
