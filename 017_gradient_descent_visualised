@@ -1,0 +1,61 @@
+# 17_gradient_descent_visualized
+# Supervised ML: Regression & Classification – Andrew Ng
+# Week 1 complete → Gradient Descent mastered
+# Date: Dec 5, 2025
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Fake house price data
+X = np.array([1, 2, 3, 4, 5])        # size in 1000s sqft
+y = np.array([1.5, 2.0, 2.5, 3.2, 3.8])  # price in $100k
+
+
+def compute_cost(theta0, theta1):
+    predictions = theta0 + theta1 * X
+    errors = predictions - y
+    return np.sum(errors**2) / (2 * len(X))
+
+
+def gradient_descent_step(theta0, theta1, alpha=0.05):
+    pred = theta0 + theta1 * X
+    error = pred - y
+    theta0 -= alpha * np.mean(error)
+    theta1 -= alpha * np.mean(error * X)
+    return theta0, theta1
+
+
+# Run gradient descent + record path
+theta0, theta1 = 0.0, 0.0
+history = [(theta0, theta1)]
+costs = [compute_cost(theta0, theta1)]
+
+for i in range(50):
+    theta0, theta1 = gradient_descent_step(theta0, theta1)
+    history.append((theta0, theta1))
+    costs.append(compute_cost(theta0, theta1))
+
+# Plot the beautiful descent
+plt.figure(figsize=(10, 4))
+
+plt.subplot(1, 2, 1)
+plt.plot(costs)
+plt.title("Cost J(θ) decreasing → Gradient Descent working!")
+plt.xlabel("Iterations")
+plt.ylabel("Cost")
+
+plt.subplot(1, 2, 2)
+theta0s = [p[0] for p in history]
+theta1s = [p[1] for p in history]
+plt.scatter(theta0s, theta1s, c=range(len(history)), cmap='viridis')
+plt.plot(theta0s, theta1s, 'r--')
+plt.title("Gradient Descent path in parameter space")
+plt.xlabel("θ0 (intercept)")
+plt.ylabel("θ1 (slope)")
+
+plt.tight_layout()
+plt.savefig("gradient_descent_visualized.png")
+plt.show()
+
+print(f"Final θ0: {theta0:.3f}, θ1: {theta1:.3f}")
+print("Week 1 complete!")
